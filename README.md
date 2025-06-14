@@ -6,6 +6,7 @@
 Router::new()
     .route("/", get(routes::root::get))
     .route("/health", get(routes::health::get))
+    .route("/query", post(routes::query::post))
 ```
 
 #### Request
