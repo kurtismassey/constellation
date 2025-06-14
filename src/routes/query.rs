@@ -1,16 +1,21 @@
+use crate::agents::research;
 use crate::models::{ErrorResponse, QueryRequest, QueryResponse, QuerySuccess};
 use axum::{http::StatusCode, response::IntoResponse, Json};
 use validator::Validate;
 
 pub async fn post(Json(request): Json<QueryRequest>) -> impl IntoResponse {
     match request.validate() {
-        Ok(_) => (
-            StatusCode::OK,
-            Json(QueryResponse::Success(QuerySuccess {
-                message: "Query received".to_string(),
-                query: request.query,
-            })),
-        ),
+        Ok(_) => {
+            let response = research::research(request.query.clone()).await;
+            (
+                StatusCode::OK,
+                Json(QueryResponse::Success(QuerySuccess {
+                    message: "Query received".to_string(),
+                    query: request.query,
+                    response: response.to_string(),
+                })),
+            )
+        }
         Err(validation_errors) => {
             let error_messages: Vec<String> = validation_errors
                 .field_errors()
