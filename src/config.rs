@@ -1,5 +1,5 @@
 pub struct Settings {
-    pub host: String, 
+    pub host: String,
     pub port: u16,
 }
 

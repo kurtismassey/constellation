@@ -14,11 +14,11 @@ docker-build:
 
 kube-deploy: docker-build
 	@echo "Deploying to Kubernetes..."
-	@kubectl apply -f constellation.yaml
+	@kubectl apply -f kubernetes/
 
 kube-delete:
 	@echo "Deleting Kubernetes deployment..."
-	@kubectl delete -f constellation.yaml
+	@kubectl delete -f kubernetes/
 
 kube-logs:
 	@echo "Showing logs..."

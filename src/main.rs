@@ -1,12 +1,9 @@
-use axum::{
-    routing::get,
-    Router,
-};
-use tower_http::trace::TraceLayer;
+use axum::{routing::get, Router};
 use std::net::SocketAddr;
+use tower_http::trace::TraceLayer;
 
-mod routes;
 mod config;
+mod routes;
 use config::Settings;
 
 fn create_router() -> Router {
@@ -15,8 +12,12 @@ fn create_router() -> Router {
         .route("/health", get(routes::health::get))
         .layer(
             TraceLayer::new_for_http()
-                .make_span_with(tower_http::trace::DefaultMakeSpan::new().level(tracing::Level::INFO))
-                .on_response(tower_http::trace::DefaultOnResponse::new().level(tracing::Level::INFO))
+                .make_span_with(
+                    tower_http::trace::DefaultMakeSpan::new().level(tracing::Level::INFO),
+                )
+                .on_response(
+                    tower_http::trace::DefaultOnResponse::new().level(tracing::Level::INFO),
+                ),
         )
 }
 
