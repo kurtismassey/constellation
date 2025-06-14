@@ -5,6 +5,7 @@ use axum::{
 use std::net::SocketAddr;
 use tower_http::trace::TraceLayer;
 
+mod agents;
 mod config;
 mod models;
 mod routes;
@@ -28,6 +29,7 @@ fn create_router() -> Router {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    dotenv::dotenv().ok();
     tracing_subscriber::fmt::init();
     let settings = Settings::new();
     let addr = format!("{}:{}", settings.host, settings.port);

@@ -21,6 +21,7 @@ pub struct QueryRequest {
 pub struct QuerySuccess {
     pub message: String,
     pub query: String,
+    pub response: String,
 }
 
 #[derive(Debug, Serialize)]
