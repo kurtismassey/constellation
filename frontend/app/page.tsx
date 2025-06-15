@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import QueryInput from "@/components/QueryInput";
@@ -30,7 +30,9 @@ export default function Home() {
 
       if (!res.ok) {
         const errorText = await res.text();
-        throw new Error(`Failed to submit query: ${res.statusText} - ${errorText}`);
+        throw new Error(
+          `Failed to submit query: ${res.statusText} - ${errorText}`,
+        );
       }
 
       const data = await res.json();
@@ -38,9 +40,10 @@ export default function Home() {
     } catch (error) {
       console.error("Error submitting query:", error);
       setResponse({
-          status: 'error',
-          query,
-          response: error instanceof Error ? error.message : "An unknown error occurred"
+        status: "error",
+        query,
+        response:
+          error instanceof Error ? error.message : "An unknown error occurred",
       });
     } finally {
       setLoading(false);
@@ -54,7 +57,11 @@ export default function Home() {
       <div className="w-full max-w-3xl my-10 px-4">
         <QueryInput onSubmit={handleSubmit} loading={loading} />
       </div>
-      {response && <span className="whitespace-pre-wrap max-w-3xl w-full px-4">{response.response}</span>}
+      {response && (
+        <span className="whitespace-pre-wrap max-w-3xl w-full px-4">
+          {response.response}
+        </span>
+      )}
     </div>
   );
 }
