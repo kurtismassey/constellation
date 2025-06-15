@@ -31,6 +31,14 @@ curl http://localhost:8080/
 
 The query endpoint utilises a web research agent to provide cited responses to queries, the agent is built using [`rig-core` ](https://github.com/0xPlaygrounds/rig/tree/main).
 
+```rust
+let research_agent = llm
+    .agent(openai::GPT_4)
+    .preamble(include_str!("prompts/research.txt"))
+    .tool(WebSearch)
+    .build();
+```
+
 #### Query Request
 
 ```bash
