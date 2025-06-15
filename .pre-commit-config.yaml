@@ -11,5 +11,24 @@ repos:
   rev: v1.0
   hooks:
     - id: fmt
+      args: [--manifest-path, backend/Cargo.toml, --]
     - id: clippy
+      args: [--manifest-path, backend/Cargo.toml, --]
     - id: cargo-check
+      args: [--manifest-path, backend/Cargo.toml]
+
+- repo: https://github.com/pre-commit/mirrors-prettier
+  rev: v4.0.0-alpha.8
+  hooks:
+    - id: prettier
+      files: ^frontend/
+      args: [--write]
+
+- repo: local
+  hooks:
+    - id: next-lint-fix
+      name: next-lint-fix
+      entry: sh -c 'cd frontend && npm run lint -- --fix'
+      language: system
+      files: ^frontend/.*\.(js|ts|jsx|tsx)$
+      pass_filenames: false

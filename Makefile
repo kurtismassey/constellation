@@ -2,15 +2,16 @@
 
 dev:
 	@echo "Starting Constellation..."
-	@cargo watch -x run
+	@cd backend && cargo watch -x run &
+	@cd frontend && npm run dev
 
 build:
 	@echo "Building Constellation..."
-	@cargo build --release
+	@cd backend && cargo build --release
 
 docker-build:
 	@echo "Building Docker image..."
-	@docker build -t docker.io/library/constellation:latest .
+	@cd backend && docker build -t docker.io/library/constellation:latest .
 
 kube-deploy: docker-build
 	@echo "Deploying to Kubernetes..."
