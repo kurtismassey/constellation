@@ -11,5 +11,8 @@ repos:
   rev: v1.0
   hooks:
     - id: fmt
+      args: [--manifest-path, backend/Cargo.toml, --]
     - id: clippy
+      args: [--manifest-path, backend/Cargo.toml, --]
     - id: cargo-check
+      args: [--manifest-path, backend/Cargo.toml]
